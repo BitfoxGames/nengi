@@ -117,6 +117,9 @@ class Instance extends EventEmitter {
                 port: webConfig.port,
                 verifyClient: (info, next) => {
                     console.log("INFO IN VERIFY CLIENT:", info)
+                    console.log(info.req)
+                    console.log(info.req.connection)
+                    console.log(info.req.connection.remoteAddress)
                     console.log("NEXT IN VERIFY CLIENT:", next)
                     return next()
                 }
