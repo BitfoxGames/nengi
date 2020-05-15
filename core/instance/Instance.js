@@ -113,7 +113,14 @@ class Instance extends EventEmitter {
         }
 
         if (typeof webConfig.port !== 'undefined') {
-            this.wsServer = new WebSocketServer({ port: webConfig.port }, () => {
+            this.wsServer = new WebSocketServer({
+                port: webConfig.port,
+                verifyClient: (info, next) => {
+                    console.log("INFO IN VERIFY CLIENT:", info)
+                    console.log("NEXT IN VERIFY CLIENT:", next)
+                    return next()
+                }
+            }, () => {
                 //console.log(this.wsServer)
             })
         } else if (typeof webConfig.httpServer !== 'undefined') {
